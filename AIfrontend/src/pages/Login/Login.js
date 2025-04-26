@@ -21,11 +21,9 @@ import {
   VisibilityOff as VisibilityOffIcon
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axios';
 import { useAuth } from '../../context/AuthContext';
 import './login.css';
-
-const API_URL = 'https://smart-resume-backend-6ggk.onrender.com';  // ← hard-coded backend
 
 export default function Login() {
   const navigate = useNavigate();
@@ -67,11 +65,7 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const { data } = await axios.post(
-        `${API_URL}/api/auth/signin`,
-        formData,
-        { headers: { 'Content-Type': 'application/json' } }
-      );
+      const { data } = await api.post('/api/auth/signin', formData);
 
       if (data?.token) {
         login(data.token, { name: data.name, email: data.email });
@@ -173,7 +167,7 @@ export default function Login() {
             </Button>
 
             <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-              Don’t have an account?{' '}
+              Don't have an account?{' '}
               <Link href="#" onClick={() => navigate('/signup')} underline="hover">
                 Sign up
               </Link>

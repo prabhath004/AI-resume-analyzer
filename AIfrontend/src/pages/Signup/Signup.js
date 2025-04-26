@@ -12,10 +12,8 @@ import {
   Link
 } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../utils/axios';
 import './signup.css';
-
-const API_URL = 'https://smart-resume-backend-6ggk.onrender.com'; // <- Hard-coded backend URL
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -64,15 +62,12 @@ export default function Signup() {
 
     setIsLoading(true);
     try {
-      const { data } = await axios.post(
-        `${API_URL}/api/auth/signup`,
-        {
-          firstName: formData.firstName.trim(),
-          lastName:  formData.lastName.trim(),
-          email:     formData.email.trim(),
-          password:  formData.password
-        }
-      );
+      const { data } = await api.post('/api/auth/signup', {
+        firstName: formData.firstName.trim(),
+        lastName:  formData.lastName.trim(),
+        email:     formData.email.trim(),
+        password:  formData.password
+      });
 
       if (data.success) {
         navigate('/login', { state: { message: 'Registration successful! Please login.' } });
