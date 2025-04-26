@@ -1,0 +1,125 @@
+.dashboard-container {
+    animation: fadeIn 0.5s ease-out;
+    padding: 32px 16px;
+  }
+  
+  /* Header */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .dashboard-title {
+    color: #1976d2;
+    font-weight: 700;
+  }
+  .upload-button {
+    background-color: #1976d2 !important;
+    color: #fff !important;
+    padding: 8px 24px;
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+  .upload-button:hover {
+    background-color: #1565c0 !important;
+    transform: translateY(-2px);
+  }
+  
+  /* Stats */
+  .dashboard-stats .stat-card {
+    border-radius: 12px;
+    background: #fafafa;
+    text-align: center;
+    padding: 16px;
+  }
+  .stat-card h6 {
+    color: #666;
+  }
+  .stat-card h3 {
+    margin-top: 8px;
+    font-weight: 700;
+  }
+  
+  /* Filters */
+  .dashboard-filters {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  
+  /* Card Grid */
+  .dashboard-grid {
+    margin-top: 16px;
+  }
+  .resume-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #EAEDF3;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: #fff;
+  }
+  .resume-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+  }
+  .resume-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0A192F;
+  }
+  .resume-position {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  .resume-score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    color: #1DCEAB;
+    margin: 12px 0;
+  }
+  .resume-score svg {
+    font-size: 20px;
+  }
+  .resume-date {
+    font-size: 0.75rem;
+    color: #888;
+  }
+  .view-button {
+    border: 1px solid #EAEDF3 !important;
+    color: #1976d2 !important;
+    transition: background 0.3s;
+  }
+  .view-button:hover {
+    background: rgba(25,118,210,0.1) !important;
+  }
+  .delete-button {
+    background: rgba(211,47,47,0.05) !important;
+    color: #D32F2F !important;
+    transition: background 0.3s;
+  }
+  .delete-button:hover {
+    background: rgba(211,47,47,0.15) !important;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .dashboard-header { flex-direction: column; gap: 16px; }
+    .dashboard-filters { flex-direction: column; }
+  }
+  

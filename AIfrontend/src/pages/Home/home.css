@@ -1,0 +1,135 @@
+/* src/pages/Home/home.css */
+:root {
+  --primary: #1976d2;
+  --primary-dark: #0d47a1;
+  --bg-light: #f8f9fa;
+  --text-dark: #333;
+}
+
+.home-container {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Hero */
+.hero-section {
+  background: var(--primary);
+  color: #fff;
+  padding: 80px 0;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+}
+.hero-subtitle {
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+.hero-actions button + button {
+  margin-left: 1rem;
+}
+.hero-image-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.hero-image {
+  max-width: 100%;
+  border-radius: 1rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Sections */
+.benefits-section,
+.features-section,
+.cta-section {
+  padding: 60px 0;
+}
+
+.benefits-section {
+  background: var(--bg-light);
+}
+.benefit-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+.benefit-card:hover {
+  transform: translateY(-4px);
+}
+.benefit-icon {
+  background: var(--primary);
+  color: #fff;
+}
+
+.features-section {
+  background: #fff;
+}
+.section-title {
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.title-divider {
+  width: 4rem;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  margin: 0 auto 2rem;
+}
+.feature-card {
+  border-radius: 0.75rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.feature-icon {
+  color: var(--primary);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* CTA */
+.cta-section {
+  background: linear-gradient(135deg, var(--bg-light), #e9ecef);
+  clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+}
+.cta-title {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+.cta-subtitle {
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+.cta-section button {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+}
+.cta-section button:hover {
+  background: var(--primary-dark);
+}
+
+/* Animations */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 600px) {
+  .hero-section { padding: 60px 0; clip-path: none; }
+  .benefits-section,
+  .features-section,
+  .cta-section { padding: 40px 0; clip-path: none; }
+  .hero-actions button + button { margin-left: 0; margin-top: 1rem; }
+}

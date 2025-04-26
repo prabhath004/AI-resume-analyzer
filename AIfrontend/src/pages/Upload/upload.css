@@ -1,0 +1,95 @@
+.upload-container {
+  padding: 2rem 1rem;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Stepper */
+.stepper-wrapper {
+  background: #fafafa;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+/* Upload Zone */
+.upload-zone {
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 2px dashed #1976d2;
+  border-radius: 8px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.upload-zone.uploaded {
+  background: rgba(25, 118, 210, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.zone-icon {
+  font-size: 4rem;
+  color: #1976d2;
+  margin-bottom: 0.5rem;
+}
+.file-name {
+  margin-top: 1rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* Job Form */
+.job-form-wrapper {
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.job-form .MuiTextField-root {
+  margin-bottom: 1.5rem;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Results */
+.results-section {
+  margin-top: 2rem;
+}
+
+/* Cards */
+.result-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+.info-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+.info-avatar {
+  margin: 0 auto 0.5rem;
+  background: #f0f0f0;
+  color: #1976d2;
+  width: 48px;
+  height: 48px;
+}
+
+/* Chips */
+.skills-chips {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.edu-chips, .skills-chips .MuiBox-root {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.chip {
+  margin: 2px;
+}
+
+/* Bullet Lists */
+.bullet-list {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0 0;
+  list-style: disc;
+}

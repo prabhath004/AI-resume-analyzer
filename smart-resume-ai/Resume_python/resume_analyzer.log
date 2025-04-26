@@ -1,0 +1,35 @@
+2025-04-20 20:10:31,587 - INFO - Use pytorch device_name: mps
+2025-04-20 20:10:31,587 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2025-04-20 20:10:33,182 - INFO - Started server process [32675]
+2025-04-20 20:10:33,182 - INFO - Waiting for application startup.
+2025-04-20 20:10:33,182 - INFO - Application startup complete.
+2025-04-20 20:10:33,187 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-04-20 20:10:47,522 - INFO - Starting resume analysis
+2025-04-20 20:10:47,549 - WARNING - CropBox missing from /Page, defaulting to MediaBox
+2025-04-20 20:10:47,679 - WARNING - CropBox missing from /Page, defaulting to MediaBox
+2025-04-20 20:10:47,974 - INFO - Extracted contact info: {'name': 'Not Found', 'email': 'ppalakur@gmu.edu', 'phone': '2408890686', 'current_position': 'Prabhath Palakurthi 4313E Ramona Dr ,Fairfax Va (Cid:131) 240-889-0686 # Ppalakur@Gmu.Edu (Cid:239) Linkedin.Com/In/Prabhath004 § Github.Com/Prabhath004 Education George Mason University Aug 2022 - May 2026 Bachelor Of Science In Computer Science Fairfax, Va Technical Skills Programming & Development: Python, Java, C, Javascript, Sql, React.Js, Next.Js, Flask, Fastapi, Node.Js, Postgresql, Mongodb Machine Learning & Cloud: Tensorflow, Pytorch, Hugging Face, Openai Api, Langchain, Aws (Ec2, S3, Lambda), Google Cloud, Firebase, Docker, Kubernetes Software Engineering & Devops: Git, Ci/Cd, Github Actions, Jenkins, Vs Code, Apache Spark, Pandas, Numpy, Rest Apis Experience Ai Systems Developer Intern March', 'current_company': 'Not Found', 'linkedin': 'linkedin.com/in/prabhath004'}
+2025-04-20 20:10:55,199 - INFO - Resume skills: 11
+2025-04-20 20:10:55,200 - INFO - JD skills: 1
+2025-04-20 20:10:55,200 - ERROR - Analysis failed: missing ), unterminated subpattern at position 15 (line 2, column 15)
+Traceback (most recent call last):
+  File "/Users/prabhathpalakurthi/Desktop/techsur-internship/Resume_python/resume_matcher.py", line 800, in analyze_resume
+    resume_edu = extract_education(resume_text)
+  File "/Users/prabhathpalakurthi/Desktop/techsur-internship/Resume_python/resume_matcher.py", line 363, in extract_education
+    if re.search(pattern, text, re.IGNORECASE | re.VERBOSE):
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/re.py", line 200, in search
+    return _compile(pattern, flags).search(string)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/re.py", line 303, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/sre_compile.py", line 788, in compile
+    p = sre_parse.parse(p, flags)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/sre_parse.py", line 955, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/sre_parse.py", line 444, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+  File "/opt/homebrew/Cellar/python@3.10/3.10.17/Frameworks/Python.framework/Versions/3.10/lib/python3.10/sre_parse.py", line 843, in _parse
+    raise source.error("missing ), unterminated subpattern",
+re.error: missing ), unterminated subpattern at position 15 (line 2, column 15)
+2025-04-20 20:19:59,429 - INFO - Shutting down
+2025-04-20 20:19:59,542 - INFO - Waiting for application shutdown.
+2025-04-20 20:19:59,547 - INFO - Application shutdown complete.
+2025-04-20 20:19:59,547 - INFO - Finished server process [32675]

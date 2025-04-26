@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Smart Resume Screener - AI-powered resume analysis" />
+    <base href="/" />
+    <title>Smart Resume Screener</title>
+    <!-- Add preconnect for external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Add loading state styles -->
+    <style>
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div style="padding: 20px; text-align: center;">
+        <h1>JavaScript Required</h1>
+        <p>You need to enable JavaScript to run this app.</p>
+      </div>
+    </noscript>
+    <div id="root">
+      <div class="loading">Loading...</div>
+    </div>
+    <!-- Add error boundary fallback -->
+    <div id="error-boundary" style="display: none;">
+      <div style="padding: 20px; text-align: center;">
+        <h1>Something went wrong</h1>
+        <p>Please refresh the page or try again later.</p>
+        <button onclick="window.location.reload()">Refresh Page</button>
+      </div>
+    </div>
+    <script>
+      // Add error handling for script loading
+      window.addEventListener('error', function(e) {
+        console.error('Script loading error:', e);
+        document.getElementById('error-boundary').style.display = 'block';
+      });
+    </script>
+  </body>
+</html>
+

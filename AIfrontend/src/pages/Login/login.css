@@ -1,0 +1,166 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 128px);
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #1976d2;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-input {
+  width: 100%;
+}
+
+.login-button {
+  margin-top: 16px;
+  padding: 12px;
+  font-weight: 500;
+}
+
+.login-links {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.login-links a {
+  color: #1976d2;
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+.login-error {
+  color: #d32f2f;
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* Form field animations */
+.MuiTextField-root {
+  transition: all 0.3s ease-in-out;
+}
+
+.MuiTextField-root:focus-within {
+  transform: translateY(-2px);
+}
+
+/* Input field focus effects */
+.MuiOutlinedInput-root {
+  transition: all 0.3s ease-in-out;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-color);
+  border-width: 2px;
+}
+
+/* Button hover effects */
+.MuiButton-root {
+  transition: all 0.3s ease-in-out !important;
+}
+
+.MuiButton-contained:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Paper hover effect */
+.MuiPaper-root {
+  transition: all 0.3s ease-in-out;
+}
+
+.MuiPaper-root:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon animations */
+.MuiInputAdornment-root .MuiSvgIcon-root {
+  transition: all 0.3s ease-in-out;
+}
+
+.MuiInputAdornment-root .MuiSvgIcon-root:hover {
+  transform: scale(1.1);
+}
+
+/* Password visibility toggle animation */
+.MuiIconButton-root {
+  transition: all 0.3s ease-in-out !important;
+}
+
+.MuiIconButton-root:hover {
+  transform: scale(1.1);
+}
+
+/* Link hover effects */
+.MuiLink-root {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.MuiLink-root::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease-in-out;
+}
+
+.MuiLink-root:hover::after {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 24px;
+  }
+
+  .MuiPaper-root {
+    padding: 2rem !important;
+  }
+  
+  .MuiTypography-h4 {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* Form field error animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.Mui-error {
+  animation: shake 0.5s ease-in-out;
+}

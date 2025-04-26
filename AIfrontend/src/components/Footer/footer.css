@@ -1,0 +1,212 @@
+.footer {
+  background-color: #0A192F;
+  color: #CCD6F6;
+  padding: 64px 0 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.footer-description {
+  opacity: 0.9;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.social-icon {
+  color: #8892B0;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #64FFDA;
+  transform: translateY(-3px);
+}
+
+.footer-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-link {
+  color: #8892B0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-link:hover {
+  color: #64FFDA;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+.footer-bottom {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.copyright {
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 960px) {
+  .footer {
+    padding: 48px 0 24px;
+  }
+
+  .footer-title {
+    font-size: 1.25rem;
+  }
+
+  .footer-section-title {
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 32px 0 16px;
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    margin-top: 32px;
+  }
+
+  .MuiGrid-item {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Social icons hover effect */
+.MuiIconButton-root {
+  transition: all 0.3s ease-in-out !important;
+}
+
+.MuiIconButton-root:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* Link hover effects */
+.MuiLink-root {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.MuiLink-root::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease-in-out;
+}
+
+.MuiLink-root:hover::after {
+  width: 100%;
+}
+
+/* Section title animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.MuiTypography-h6 {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Divider styling */
+.MuiDivider-root {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
+}
