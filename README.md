@@ -1,4 +1,4 @@
-📄 Smart Resume Screener
+📄 Smart Resume Screener          Watch Demo Video: 👉 https://www.youtube.com/watch?v=UbisAvrGNdg
 📚 Project Overview
 The Smart Resume Screener is a full-stack, AI-powered platform that automates resume analysis and matching against job descriptions.
 It uses advanced NLP techniques, semantic search, text similarity models, and Spring Boot microservices to generate detailed ATS-style fit scores, skill matches, and candidate summaries.
