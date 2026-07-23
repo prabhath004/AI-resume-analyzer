@@ -7,6 +7,12 @@ It uses advanced NLP techniques, semantic search, text similarity models, and Sp
 🔵 Important:
 While OpenAI is used only for final summary generation (strengths/weaknesses), the core analysis — including skill extraction, experience calculation, education parsing, and semantic scoring — is fully built using custom NLP and ML models (spaCy, Sentence-Transformers, TF-IDF).
 
+---
+Architecture
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/8c4e7354-c799-4f9a-b1f7-8554a1d62290" />
+---
+
+
 ⚙️ Project Architecture
 
 Component	Tech Stack	Hosting
