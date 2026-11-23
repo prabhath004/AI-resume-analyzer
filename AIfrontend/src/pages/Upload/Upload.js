@@ -51,7 +51,7 @@ import axios from 'axios';
 import './upload.css';
 
 const STEPS = ['Upload Resume', 'Job Description', 'Results'];
-const COLORS = ['#1976d2', '#00ab55', '#ffb300', '#f44336', '#7c4dff', '#0097a7'];
+const COLORS = ['#315B7D', '#2E7458', '#B7832F', '#B34B4B', '#6B628F', '#347C86'];
 
 // hard-coded URLs:
 const API_URL = 'https://smart-resume-backend-6ggk.onrender.com';
