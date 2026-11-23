@@ -12,7 +12,7 @@ import {
   Link
 } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import api from '../../utils/axios';
+import { api } from '../../utils/axios';
 import './signup.css';
 
 export default function Signup() {

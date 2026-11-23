@@ -21,7 +21,7 @@ import {
   VisibilityOff as VisibilityOffIcon
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
-import api from '../../utils/axios';
+import { api } from '../../utils/axios';
 import { useAuth } from '../../context/AuthContext';
 import './login.css';
 

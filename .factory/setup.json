@@ -1,0 +1,12 @@
+{
+  "runtimes": {
+    "node": "22"
+  },
+  "setup": [
+    "cd AIfrontend && npm ci"
+  ],
+  "checks": {
+    "test": "cd AIfrontend && npm test -- --watchAll=false",
+    "build": "cd AIfrontend && npm run build"
+  }
+}

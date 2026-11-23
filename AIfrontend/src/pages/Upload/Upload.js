@@ -17,7 +17,8 @@ import {
   CardContent,
   Avatar,
   Chip,
-  Divider
+  Divider,
+  Alert
 } from '@mui/material';
 import {
   CloudUpload as CloudUploadIcon,
@@ -50,7 +51,7 @@ import axios from 'axios';
 import './upload.css';
 
 const STEPS = ['Upload Resume', 'Job Description', 'Results'];
-const COLORS = ['#1976d2', '#00ab55', '#ffb300', '#f44336', '#7c4dff', '#0097a7'];
+const COLORS = ['#315B7D', '#2E7458', '#B7832F', '#B34B4B', '#6B628F', '#347C86'];
 
 // hard-coded URLs:
 const API_URL = 'https://smart-resume-backend-6ggk.onrender.com';
@@ -140,28 +141,41 @@ export default function Upload() {
       { name: 'Education', value: analysis?.educationScore   ?? 0 },
     ];
     return (
-      <ResponsiveContainer width="100%" height={260}>
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            innerRadius={70}
-            outerRadius={100}
-            label={({ name, value }) => `${name}: ${value}%`}
-            labelLine={false}
-            paddingAngle={4}
-          >
-            {data.map((_, i) => (
-              <Cell key={i} fill={COLORS[i % COLORS.length]} />
-            ))}
-          </Pie>
-          <RechartLegend verticalAlign="bottom" height={36} />
-          <RechartTooltip formatter={v => `${v}%`} />
-        </PieChart>
-      </ResponsiveContainer>
+      <Box>
+        <ResponsiveContainer width="100%" height={240}>
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="45%"
+              innerRadius={62}
+              outerRadius={88}
+              paddingAngle={4}
+            >
+              {data.map((_, i) => (
+                <Cell key={i} fill={COLORS[i % COLORS.length]} />
+              ))}
+            </Pie>
+            <RechartLegend verticalAlign="bottom" height={32} />
+            <RechartTooltip formatter={v => `${v}%`} />
+          </PieChart>
+        </ResponsiveContainer>
+        <Box className="score-metrics" aria-label="Score details">
+          {data.map((score, index) => (
+            <Box className="score-metric" key={score.name}>
+              <Box
+                className="score-swatch"
+                sx={{ backgroundColor: COLORS[index % COLORS.length] }}
+                aria-hidden="true"
+              />
+              <Typography component="span">{score.name}</Typography>
+              <Typography component="strong">{score.value}%</Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
     );
   };
 
@@ -188,12 +202,18 @@ export default function Upload() {
 
   return (
     <Container maxWidth="md" className="upload-container">
-      <Typography variant="h3" align="center" gutterBottom>
-        Smart Resume Screener
-      </Typography>
+      <Box component="header" className="upload-header">
+        <Typography className="eyebrow">AI-powered candidate review</Typography>
+        <Typography component="h1" variant="h3" className="upload-title">
+          Resume analysis
+        </Typography>
+        <Typography className="upload-subtitle">
+          Compare a resume with a job description and get a structured fit assessment.
+        </Typography>
+      </Box>
 
       {step < 2 && (
-        <Paper elevation={0} className="stepper-wrapper">
+        <Paper elevation={0} className="stepper-wrapper" aria-label="Analysis progress">
           <Stepper activeStep={step} alternativeLabel>
             {STEPS.map(label => (
               <Step key={label}>
@@ -206,24 +226,36 @@ export default function Upload() {
 
       {step === 0 && (
         <Paper
-          elevation={3}
+          elevation={0}
           className={`upload-zone ${file ? 'uploaded' : ''}`}
           onDragOver={e => e.preventDefault()}
           onDrop={onDrop}
+          aria-labelledby="upload-zone-title"
+          aria-describedby="upload-formats"
         >
-          <CloudUploadIcon className="zone-icon" />
-          <Typography variant="h6">Drag & Drop your resume here</Typography>
-          <Typography variant="body2" color="textSecondary">or</Typography>
-          <label htmlFor="resume-file">
+          <Box className="zone-icon-wrap" aria-hidden="true">
+            <CloudUploadIcon className="zone-icon" />
+          </Box>
+          <Typography id="upload-zone-title" component="h2" variant="h5">
+            Upload your resume
+          </Typography>
+          <Typography className="zone-copy">
+            Drag and drop a file here, or choose one from your device.
+          </Typography>
+          <Typography id="upload-formats" className="file-guidance">
+            PDF, DOC, or DOCX
+          </Typography>
+          <label htmlFor="resume-file" className="file-picker-label">
             <input
               id="resume-file"
               type="file"
               accept=".pdf,.doc,.docx"
-              hidden
+              className="visually-hidden"
+              aria-label="Choose resume file"
               onChange={onFileSelect}
             />
-            <Button variant="outlined" component="span">
-              Browse Files
+            <Button variant="contained" component="span" size="large">
+              Choose resume file
             </Button>
           </label>
           {file && <Typography className="file-name">{file.name}</Typography>}
@@ -231,32 +263,46 @@ export default function Upload() {
       )}
 
       {step === 1 && (
-        <Paper elevation={3} className="job-form-wrapper">
-          <form onSubmit={analyze} className="job-form">
+        <Paper elevation={0} className="job-form-wrapper">
+          <Box className="form-heading">
+            <Typography component="h2" variant="h5">Add the job description</Typography>
+            <Typography>
+              The analysis compares the selected resume with the role requirements below.
+            </Typography>
+            <Chip label={file?.name} size="small" className="selected-file" />
+          </Box>
+          <form onSubmit={analyze} className="job-form" aria-busy={loading}>
             <TextField
-              label="Paste Job Description"
+              label="Job description"
               variant="outlined"
               fullWidth
               multiline
-              rows={6}
+              minRows={7}
               required
               value={jobDesc}
               onChange={e => setJobDesc(e.target.value)}
+              helperText="Include responsibilities, required skills, and experience for the best comparison."
             />
             {error && (
-              <Typography color="error" sx={{ mt: 1 }}>
+              <Alert severity="error" role="alert" className="analysis-alert">
                 {error}
+              </Alert>
+            )}
+            {loading && (
+              <Typography role="status" className="loading-status">
+                Analyzing the resume against this role. This may take a moment.
               </Typography>
             )}
             <Box className="form-actions">
-              <Button onClick={() => setStep(0)}>Back</Button>
+              <Button onClick={() => setStep(0)} disabled={loading}>Back</Button>
               <Button
                 type="submit"
                 variant="contained"
                 disabled={loading}
-                startIcon={loading && <CircularProgress size={20} />}
+                size="large"
+                startIcon={loading && <CircularProgress size={18} color="inherit" aria-hidden="true" />}
               >
-                Analyze
+                {loading ? 'Analyzing resume' : 'Analyze resume'}
               </Button>
             </Box>
           </form>
@@ -264,12 +310,27 @@ export default function Upload() {
       )}
 
       {step === 2 && analysis && (
-        <Box className="results-section">
+        <Box className="results-section" aria-labelledby="results-title">
+          <Box className="results-header">
+            <Box>
+              <Typography className="eyebrow">Analysis complete</Typography>
+              <Typography id="results-title" component="h2" variant="h4">
+                Candidate fit report
+              </Typography>
+              <Typography>
+                A structured comparison of the resume and job description.
+              </Typography>
+            </Box>
+            <Box className="overall-score" aria-label={`Overall fit score ${analysis.overallFitScore ?? 0} percent`}>
+              <Typography className="score-value">{analysis.overallFitScore ?? 0}%</Typography>
+              <Typography className="score-label">Overall fit</Typography>
+            </Box>
+          </Box>
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}>
-              <Card>
+              <Card className="result-card">
                 <CardContent>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography component="h3" variant="h6" gutterBottom className="section-title">
                     <PieChartIcon fontSize="small" /> Score Breakdown
                   </Typography>
                   <ScoreDonut />
@@ -278,9 +339,9 @@ export default function Upload() {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <Card>
+              <Card className="result-card">
                 <CardContent>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography component="h3" variant="h6" gutterBottom className="section-title">
                     <BarChartIcon fontSize="small" /> Skills Overview
                   </Typography>
                   <SkillsBar />
@@ -327,14 +388,14 @@ export default function Upload() {
                 value: analysis.fitCategory
               }
             ].map((info, idx) => (
-              <Grid item xs={12} sm={6} md={4} key={idx}>
-                <Card>
+              <Grid item xs={12} sm={6} md={3} key={idx}>
+                <Card className="info-card">
                   <CardContent>
-                    <Avatar sx={{ bgcolor: 'primary.main' }}>{info.icon}</Avatar>
+                    <Avatar className="info-avatar">{info.icon}</Avatar>
                     <Typography variant="subtitle2" sx={{ mt: 1 }}>
                       {info.label}
                     </Typography>
-                    <Typography>{info.value}</Typography>
+                    <Typography className="info-value">{info.value || 'Not provided'}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
