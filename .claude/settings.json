@@ -13,7 +13,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
+            "command": "FACTORY_SCREENSHOT_DIR=\"/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser\" bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
             "async": true,
             "timeout": 20
           }
@@ -26,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
+            "command": "FACTORY_SCREENSHOT_DIR=\"/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser\" bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
             "async": true,
             "timeout": 20
           }
@@ -38,7 +38,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
+            "command": "FACTORY_SCREENSHOT_DIR=\"/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser\" bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
             "async": true,
             "timeout": 20
           }
@@ -50,7 +50,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
+            "command": "FACTORY_SCREENSHOT_DIR=\"/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser\" bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
             "async": true,
             "timeout": 20
           }
@@ -62,7 +62,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
+            "command": "FACTORY_SCREENSHOT_DIR=\"/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser\" bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
             "async": true,
             "timeout": 20
           }
@@ -74,7 +74,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
+            "command": "FACTORY_SCREENSHOT_DIR=\"/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser\" bun \"/Users/Prabhath.P/Desktop/Factory/marshal-factory/hooks/report.ts\"",
             "async": true,
             "timeout": 20
           }

@@ -6,8 +6,24 @@
         "/Users/Prabhath.P/Desktop/Factory/marshal-factory/mcp/factory-report.ts"
       ],
       "env": {
-        "FACTORY_REPORTER": "hook"
+        "FACTORY_REPORTER": "hook",
+        "FACTORY_SCREENSHOT_DIR": "/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser"
       }
+    },
+    "playwright": {
+      "command": "playwright-mcp",
+      "args": [
+        "--headless",
+        "--isolated",
+        "--browser",
+        "chromium",
+        "--output-dir",
+        "/Users/Prabhath.P/Desktop/Factory/marshal-factory/.local/browser",
+        "--proxy-server",
+        "http://127.0.0.1:9",
+        "--proxy-bypass",
+        "localhost,127.0.0.1,[::1]"
+      ]
     }
   }
 }
