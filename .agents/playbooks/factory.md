@@ -1,11 +1,12 @@
 ---
-extends: bug-fix, feature, opening-a-pr, babysit
-when: Resolving one Linear issue unattended on a `factory/<KEY>` branch that marshal-factory started, where the first message carries the issue.
+when: Executing an approved Factory job unattended on a `factory/<KEY>` branch created by marshal-factory.
 ---
 
 # Factory run
 
-This playbook ships with marshal-factory, not with the repository: the first message names its path on this machine. It changes PStack's bundled playbooks the way a project playbook under `.agents/playbooks/` does, so open the bundled ones it extends and apply the changes below. A repository copy of this file may add notes about that repository; where it differs from this one, this one wins.
+This playbook ships with marshal-factory, not with the repository: the first message names its path on this machine. A repository copy may add repository-specific notes; where it differs from this file, this file wins.
+
+The runtime has the Coforge skills `coforge-brownfield`, `coforge-task`, `coforge-browser-verification`, and `coforge-delivery`, plus the pinned PStack plugin. Use the four Coforge skills for the mission lifecycle. Use PStack's actual installed skills where applicable: `tdd` for a cheap regression target, `fix-ci`, `fix-merge-conflicts`, `make-pr-easy-to-review`, `show-me-your-work`, and `babysit`. Do not look for the obsolete `feature`, `bug-fix`, or `opening-a-pr` names; PStack 0.9.69 does not ship them.
 
 No human reads this thread while it runs. The supervision panel and the pull request are the only outputs anyone sees. The branch name carries the work key: `factory/FAC-2` works Linear issue `FAC-2`, while `factory/COF-104` works Coforge mission `COF-104`. The approved issue or mission goal, plan, acceptance criteria, and URL are in the first message.
 
@@ -27,7 +28,7 @@ When the first message identifies a Coforge mission, treat its approved plan as 
 ## Triage
 
 1. Call `report_stage` with `stage: "triage"`.
-2. Decide the type from the issue text. A described symptom that differs from stated expected behaviour is a bug: follow the bundled Bug fix playbook. A request for new behaviour is a feature: follow the bundled Feature playbook.
+2. Decide the type from the mission text. For a defect with a cheap local test target, use PStack's `tdd` skill. For requested behavior, follow `coforge-task` and the repository's existing development conventions.
 3. Test for ambiguity before any code. Write down the acceptance check, a test or an observable result, using only the issue text. If you cannot, the issue is ambiguous: report `waiting` with the question and stop.
 4. Work in the thread's worktree on the current branch. Do not create other worktrees or branches for the PR.
 
@@ -38,7 +39,7 @@ A run that stopped in `waiting` resumes when the reporter answers on Linear. The
 1. Start again at Triage and call `report_stage` with `stage: "triage"`. Keep the branch and any commits already on it.
 2. The answer is the spec. Where it picks an option you offered, build that option and nothing the reporter did not ask for. Where it adds a request, include it.
 3. Run the ambiguity test again with the issue plus the answer. If you still cannot write the acceptance check, report `waiting` with one more concrete question about what is still open, and end the turn. Do not guess.
-4. Otherwise continue with the bundled playbook as usual.
+4. Otherwise continue with this playbook and the approved checklist.
 
 ## Merge conflicts
 
@@ -47,7 +48,7 @@ When the factory tells this thread that its PR conflicts with main, the board ha
 1. Run `git fetch origin` and `git merge origin/main` on this branch. Never rebase a pushed factory branch and never force-push it.
 2. Resolve each conflict so that main's change and yours both keep working. Read main's commit to learn what it meant. Do not drop either side to make the conflict go away.
 3. Call `report_stage` with `stage: "verifying"`, then run lint, typecheck, tests and build, and check the changed screen when the conflict touched UI.
-4. Commit the merge, push, and babysit the PR to green as in the bundled Babysit playbook. Run `factory-verify` on the pushed merge commit. Then call `report_stage` with `stage: "pr"`, the `prUrl` and a fresh merge assessment again, and end the turn.
+4. Commit the merge, push, and use PStack's `babysit` skill to drive the PR to green. Run `factory-verify` on the pushed merge commit. Then call `report_stage` with `stage: "pr"`, the `prUrl` and a fresh merge assessment again, and end the turn.
 5. If the two changes contradict each other and the issue does not say which wins, abort the merge with `git merge --abort`, report `waiting` with a question that names both changes, and end the turn.
 
 ## Merge assessment
@@ -59,21 +60,15 @@ Every run ends one of three ways: the factory merges it, it hands it over to the
 3. Recommend `merge` when you are confident you built what the issue asked for and that it works. Additive changes the issue asked for, such as new exports or new endpoints, are fine.
 4. Recommend `handover` only when you are not confident: you are unsure what the issue meant, unsure about an assumption you had to make, or you could not show the change works. Say why in one or two sentences.
 
-When you report `pr`, pass `assessment`: `recommendation`, `interpretation`, `assumptions`, and `confidence` with `confident` and, when you are not confident, the `reason`. Add `notes` for anything else the owner should know. When the change shows on a page, add `screenshots`: up to six entries, each with the `file` the `playwright` server saved (its name under `/work/browser`) and a `caption` that says what the image shows and what to look for. Each file must be a PNG, JPEG or WebP image under 1 MB; `report_stage` refuses the report if one can't be read. Be honest: the factory checks CI, conflicts and Bugbot itself, holds the head to the evidence `factory-verify` reported for it, and a `merge` it cannot back up costs trust.
+When you report `pr`, pass `assessment`: `recommendation`, `interpretation`, `assumptions`, and `confidence` with `confident` and, when you are not confident, the `reason`. Add `notes` for anything else the owner should know. When the change shows on a page, add `screenshots`: up to six entries, each with the `file` the configured Playwright server saved and a `caption` that says what the image shows and what to look for. Each file must be a PNG, JPEG or WebP image under 1 MB; `report_stage` refuses the report if one can't be read. Be honest: the factory checks CI, conflicts and Bugbot itself, holds the head to the evidence `factory-verify` reported for it, and a `merge` it cannot back up costs trust.
 
-## Changes to the bundled playbooks
+## PStack adaptations for unattended Factory runs
 
-- **Before** "Reproduce it yourself on the matching surface via the driver skill" call `report_stage` with `stage: "investigating"`.
-- **Replace** "Ask the user only with a stated, specific reason the control surface cannot reach the target, and only after driving it as far as it goes." with: If the control surface cannot reach the target after you drove it as far as it goes, report `waiting` with the reason and the exact repro you need, then stop.
-- **Before** "Plan the fix." call `report_stage` with `stage: "implementing"`.
-- **Replace** "Skip it when the test would be expensive, integration-heavy, or unclear." with: In a factory run the failing test is mandatory. Write it first, run it, and quote the failure before the fix. If no test can express the bug, report `waiting` and say why.
-- **After** "Stage the commits so the failing repro lands before the fix in git history." commit the failing test on its own, then the fix in a second commit.
-- **Before** "Verify on the same surface." call `report_stage` with `stage: "verifying"`. Run the repo's lint, typecheck, tests and build locally before you push.
-- **Before** "`how` over the affected subsystem." call `report_stage` with `stage: "investigating"`.
-- **Before** "Delegate code-writing to a subagent using your configured feature model" call `report_stage` with `stage: "implementing"`.
-- **Before** "Verify on the matching surface." call `report_stage` with `stage: "verifying"`. Run the repo's lint, typecheck, tests and build locally before you push.
-- **In** "Use Conventional Commits in the form `type(scope): subject`." prefix the title with the issue key, as in `FAC-2 fix(search): match item names case-insensitively`.
-- **After** "Drop a section when it has nothing to say." start the body with a line that links the issue, as in `Linear: [FAC-2](<issue url>)`.
-- **Replace** "Opening a PR does not start a babysit." with: In a factory run, opening the PR starts a `drive` babysit of that one PR right away. The factory run is the standing request to get it green.
-- **Replace** "Run `drive` and `background` under `/loop` in dynamic mode." with: Run the watcher in the foreground and rerun it until it returns a verdict. Do not use `/loop` or scheduled wakeups: once the turn ends, nothing wakes this thread.
-- **After** "Babysitting never authorizes merging." when the watcher reports `READY`, or owner approval is the only blocker left, run `factory-verify` on the pushed head, then call `report_stage` with `stage: "pr"`, the `prUrl`, a summary of the CI and review state, and your merge assessment. Then end the turn. If CI or a bot finding still fails after three fix rounds, report `failed` with the PR URL in the summary.
+- Report `investigating` before reproducing or reading deeply, `implementing` before edits, and `verifying` before checks.
+- If the control surface cannot reach the target, report `waiting` with the exact missing access or reproduction and stop.
+- For a defect with a cheap test target, use `tdd`: capture the failure before the fix and keep the regression test.
+- Run relevant lint, typecheck, tests, build, and browser verification before pushing.
+- Prefix commits with the mission key, for example `COF-12 fix(search): match item names case-insensitively`.
+- Use `make-pr-easy-to-review` for the final description and `show-me-your-work` when the run has non-obvious decisions.
+- Opening the PR starts `babysit`; use `fix-ci` and `fix-merge-conflicts` when needed. Watch in the foreground because no scheduler wakes this thread after it ends.
+- Babysitting never authorizes merging. When the PR is ready or only owner approval remains, run `factory-verify`, report `pr` with fresh evidence, and stop. After three failed repair rounds, report `failed` with the PR URL and exact blocker.
